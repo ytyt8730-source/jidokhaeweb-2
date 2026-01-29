@@ -1,0 +1,128 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-01-29T00:00:00Z",
+  "agents": {
+    "council": {
+      "architect": {
+        "path": ".claude/agents/council/architect.md",
+        "model": "sonnet",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "에이전트/스킬 생성 청사진 수립",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      },
+      "strategist": {
+        "path": ".claude/agents/council/strategist.md",
+        "model": "haiku",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "리소스 배분 및 모델 선택 전략",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      },
+      "auditor": {
+        "path": ".claude/agents/council/auditor.md",
+        "model": "sonnet",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "품질 및 보안 검증",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      }
+    },
+    "forge": {
+      "agent-smith": {
+        "path": ".claude/agents/forge/agent-smith.md",
+        "model": "sonnet",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "에이전트 .md 파일 생성",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      },
+      "skill-weaver": {
+        "path": ".claude/agents/forge/skill-weaver.md",
+        "model": "sonnet",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "SKILL.md 파일 생성",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      }
+    },
+    "crucible": {
+      "analyzer": {
+        "path": ".claude/agents/crucible/analyzer.md",
+        "model": "haiku",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "성능 메트릭 수집 및 패턴 분석",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      },
+      "evolver": {
+        "path": ".claude/agents/crucible/evolver.md",
+        "model": "sonnet",
+        "grade": "⭐ Core",
+        "created": "2026-01-29",
+        "purpose": "개선안 도출 및 진화 관리",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      }
+    },
+    "project": {
+      "설계": {
+        "path": ".claude/agents/설계.md",
+        "model": "sonnet",
+        "grade": "🟢 Trusted",
+        "created": "2026-01-01",
+        "purpose": "Milestone을 Work Package로 분해",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      },
+      "시나리오": {
+        "path": ".claude/agents/시나리오.md",
+        "model": "sonnet",
+        "grade": "🟢 Trusted",
+        "created": "2026-01-01",
+        "purpose": "Phase별 Scenario 생성",
+        "stats": {
+          "total_runs": 0,
+          "success_rate": 0,
+          "avg_tokens": 0
+        }
+      }
+    }
+  },
+  "grades": {
+    "🔴 Experimental": "신규 생성, 격리 환경만",
+    "🟡 Probation": "성공 5회+, 사용자 확인 후",
+    "🟢 Trusted": "성공률 90%+, 20회+, 자동 실행",
+    "⭐ Core": "Auditor 인증, 기반으로 사용 가능"
+  }
+}
