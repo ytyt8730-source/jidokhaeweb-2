@@ -200,9 +200,12 @@ CREATE TABLE notification_logs (
     user_id UUID REFERENCES users(id),
     notification_type VARCHAR(50) NOT NULL,
     meeting_id UUID REFERENCES meetings(id),
+    recipient VARCHAR(20) NOT NULL,  -- 수신자 전화번호
+    message_content TEXT,             -- 발송된 메시지 내용
     sent_at TIMESTAMP DEFAULT NOW(),
-    status VARCHAR(20) DEFAULT 'sent',
-    error_message TEXT
+    status VARCHAR(20) DEFAULT 'success',  -- success, failed
+    error_message TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- 운영자 권한
@@ -235,6 +238,7 @@ ALTER TABLE badges ENABLE ROW LEVEL SECURITY;
 ALTER TABLE bookshelf ENABLE ROW LEVEL SECURITY;
 ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE suggestions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE notification_logs ENABLE ROW LEVEL SECURITY;
 
 -- ========================================
 -- RLS 정책 정의
@@ -375,6 +379,21 @@ CREATE POLICY "Admins can manage all suggestions" ON suggestions
         )
     );
 
+-- notification_logs 정책
+-- 운영자만 알림 로그 조회 가능
+CREATE POLICY "Admins can view notification logs" ON notification_logs
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM users u
+            WHERE u.id = auth.uid()
+            AND u.role IN ('admin', 'super_admin')
+        )
+    );
+
+-- 시스템(서버)은 알림 로그 생성 가능 (서비스 롤 키 사용)
+CREATE POLICY "System can create notification logs" ON notification_logs
+    FOR INSERT WITH CHECK (true);
+
 -- 인덱스
 CREATE INDEX idx_registrations_user ON registrations(user_id);
 CREATE INDEX idx_registrations_meeting ON registrations(meeting_id);
@@ -382,6 +401,9 @@ CREATE INDEX idx_registrations_status ON registrations(status);
 CREATE INDEX idx_registrations_deadline ON registrations(deposit_deadline) WHERE status = 'pending_transfer';
 CREATE INDEX idx_meetings_datetime ON meetings(datetime);
 CREATE INDEX idx_notification_logs_user ON notification_logs(user_id);
+CREATE INDEX idx_notification_logs_type ON notification_logs(notification_type);
+CREATE INDEX idx_notification_logs_sent_at ON notification_logs(sent_at);
+CREATE INDEX idx_notification_logs_status ON notification_logs(status);
 CREATE INDEX idx_waitlists_meeting_position ON waitlists(meeting_id, position);
 
 -- ========================================

@@ -57,7 +57,9 @@
       "Bash(npm run type-check:*)",
       "Bash(taskkill:*)",
       "Bash(ping:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(git config:*)",
+      "Bash(git remote add:*)"
     ]
   },
   "enabledPlugins": {

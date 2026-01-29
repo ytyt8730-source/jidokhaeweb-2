@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+import { logger } from '@/lib/logger'
 
 // Vercel Cron 설정: vercel.json에서 schedule 설정 필요
 // 예: "schedule": "0 * * * *" (매시간 실행)
@@ -53,10 +54,11 @@ export async function GET(request: Request) {
       throw updateError
     }
 
-    // 로그 기록 (선택사항)
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[Cron] ${expiredIds.length}건의 신청이 만료 처리됨`)
-    }
+    // 로그 기록
+    logger.info('입금 대기 만료 처리 완료', {
+      expiredCount: expiredIds.length,
+      expiredIds,
+    })
 
     return NextResponse.json({
       success: true,
